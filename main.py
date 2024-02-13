@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.firefox.options import Options
 import time
 import logging
 import configparser
@@ -12,12 +13,15 @@ config.read('config.ini')
 
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
+options = Options()
+options.add_argument("--headless")
+
 name_form = str(config['DEFAULT']['name'])
 email_form = str(config['DEFAULT']['email'])
 phone_form = str(config['DEFAULT']['phone'])
 message = str(config['DEFAULT']['message'])
 
-driver = webdriver.Firefox()
+driver = webdriver.Firefox(options=options)
 
 url = 'https://www.sreality.cz/hledani/prode/byty'
 driver.get(url)
